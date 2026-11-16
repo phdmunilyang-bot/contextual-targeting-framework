@@ -1,0 +1,7 @@
+equal,size,gap
+Low_Sex0,Low_Sex0,High_Sex1
+Low_Sex1,Low_Sex1,High_Sex0
+High_Sex0,High_Sex0,Low_Sex1
+Mid_Sex0,Mid_Sex0,Low_Sex0
+Mid_Sex1,Mid_Sex1,Mid_Sex1
+High_Sex1,High_Sex1,Mid_Sex0
