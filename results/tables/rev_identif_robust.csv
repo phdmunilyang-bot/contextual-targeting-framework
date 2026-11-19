@@ -1,0 +1,13 @@
+estimator,benchmark,tau_vs_base,order
+HGB,0.6,1.0,Low_Sex0 > Low_Sex1 > High_Sex0 > Mid_Sex0 > Mid_Sex1 > High_Sex1
+HGB,0.75,1.0,Low_Sex0 > Low_Sex1 > High_Sex0 > Mid_Sex0 > Mid_Sex1 > High_Sex1
+HGB,0.9,0.87,Low_Sex0 > Low_Sex1 > Mid_Sex0 > High_Sex0 > Mid_Sex1 > High_Sex1
+RF,0.6,0.6,High_Sex0 > Low_Sex1 > Low_Sex0 > Mid_Sex0 > Mid_Sex1 > High_Sex1
+RF,0.75,0.47,High_Sex0 > Mid_Sex0 > Low_Sex0 > Low_Sex1 > Mid_Sex1 > High_Sex1
+RF,0.9,0.6,High_Sex0 > Low_Sex0 > Mid_Sex0 > Low_Sex1 > Mid_Sex1 > High_Sex1
+ET,0.6,0.73,Low_Sex0 > High_Sex0 > Mid_Sex0 > Low_Sex1 > Mid_Sex1 > High_Sex1
+ET,0.75,0.47,High_Sex0 > Mid_Sex0 > Low_Sex0 > Low_Sex1 > Mid_Sex1 > High_Sex1
+ET,0.9,0.6,Low_Sex0 > Mid_Sex0 > High_Sex0 > Low_Sex1 > Mid_Sex1 > High_Sex1
+EN,0.6,0.87,Low_Sex1 > Low_Sex0 > High_Sex0 > Mid_Sex0 > Mid_Sex1 > High_Sex1
+EN,0.75,0.47,Low_Sex1 > Low_Sex0 > Mid_Sex1 > Mid_Sex0 > High_Sex0 > High_Sex1
+EN,0.9,0.33,Low_Sex1 > Low_Sex0 > Mid_Sex1 > Mid_Sex0 > High_Sex1 > High_Sex0

@@ -1,30 +1,32 @@
-# A Counterfactual-Explanation-and-Optimisation Framework for Budget-Constrained Intervention Targeting
+# Contextual Optimization for Budget-Constrained Public-Sector Targeting
 
-Replication code for the manuscript *"A Counterfactual-Explanation-and-Optimisation
-Framework for Budget-Constrained Intervention Targeting: An Application to Children's
-Digital and AI Literacy"* (under review, **anonymous journal**).
+Replication code for the manuscript
 
-> **Double-blind notice.** This repository is intentionally anonymised. It contains no
-> author names, affiliations, or contact details, and should not be de-anonymised while
-> the manuscript is under review.
+> *Contextual Optimization for Budget-Constrained Public-Sector Targeting:
+> Counterfactual Side Information, Robust Allocation, and the Efficiency–Equity
+> Trade-off, with an Application to Children's Digital Literacy* (under review).
+
+The framework couples **counterfactual explanation** (explainable AI) with
+**budget-constrained optimisation** (operations research) into a single
+estimate-then-allocate pipeline for deciding *whom to reach first* under a fixed
+public budget.
 
 ## Overview
 
-The framework couples **counterfactual explanation** (explainable AI) with
-**budget-constrained optimisation** (operations research) into a single estimate-then-allocate
-pipeline:
-
-1. **Module 1 — Prediction.** Out-of-sample comparison of a *provisioning/resource* block
-   against a *participation/activity* block for predicting Computer & Information Literacy
-   (CIL). Provisioning carries almost no out-of-sample signal; participation does.
+1. **Module 1 — Prediction.** Out-of-sample comparison of a *provisioning/resource*
+   block against a *participation/activity* block for predicting Computer &
+   Information Literacy (CIL). Provisioning carries almost no out-of-sample signal;
+   participation does — reframing allocation from spending to reach.
 2. **Module 2 — Counterfactual sensitivity.** Per-subgroup (SES × sex) intervention
-   sensitivity, estimated by raising positively-associated, policy-deliverable engagement
-   levers to the national weighted 75th percentile. Interpreted as *relative sensitivity
-   for prioritisation*, not as an average treatment effect.
+   sensitivity, estimated by raising positively-associated, policy-deliverable
+   engagement levers to the national weighted 75th percentile. Interpreted as a
+   *relative priority for prioritisation*, not an average treatment effect.
 3. **Module 3 — Targeting & frontier.** Effect/cost ratios feed a fractional-knapsack
-   allocation; the efficiency–equity frontier is traced across budgets and cost structures.
-4. **Cross-national replication** over eight education systems, and a **policy-context
-   appendix** built from the IEA national-contexts survey.
+   allocation; the efficiency–equity frontier is traced across budgets and cost
+   structures, with a robust (lower-confidence-bound) variant for the estimated
+   sensitivities.
+4. **Cross-national replication** over all 34 participating education systems, and a
+   **policy-context appendix** built from the IEA national-contexts survey.
 
 ## Repository structure
 
@@ -32,18 +34,28 @@ pipeline:
 .
 ├── data/                 # place IEA ICILS 2023 files here (not redistributed — see below)
 ├── notebooks/
-│   ├── 01_prediction_signal.ipynb
-│   ├── 02_counterfactual_sensitivity.ipynb
-│   ├── 03_targeting_frontier.ipynb
-│   ├── 04_cross_country.ipynb
-│   ├── 05_policy_appendix.ipynb
-│   ├── 06_inference.ipynb          # cluster-bootstrap CIs (Modules 1-2), reduced levers, 5-PV baselines
-│   ├── 07_robustness.ipynb         # learner x benchmark robustness, split-sample sign screen, sign test
-│   ├── 08_optimization.ipynb       # MKP, submodular (exact PWL-MILP), robust knapsack, exact Pareto
-│   ├── 09_binding.ipynb            # sensitivity: when the optimization structures bind (Appendix D)
-│   ├── 10_cross_country_full.ipynb # full 34-system replication + sign test
-│   ├── 11_replication.ipynb        # optimization replication in further systems
-│   └── 12_convergent.ipynb         # convergent-validity check vs model-free contrast
+│   │  # --- core pipeline (run in order) ---
+│   ├── 01_prediction_signal.ipynb       # Module 1: provisioning vs participation OOS R^2
+│   ├── 02_counterfactual_sensitivity.ipynb # Module 2: subgroup sensitivities
+│   ├── 03_targeting_frontier.ipynb      # Module 3: targeting order + efficiency–equity frontier
+│   ├── 04_cross_country.ipynb           # eight-system cross-national replication
+│   ├── 05_policy_appendix.ipynb         # national policy-context appendix
+│   ├── 06_inference.ipynb               # cluster-bootstrap CIs (Modules 1–2), reduced levers, 5-PV
+│   ├── 07_robustness.ipynb              # learner × benchmark robustness, split-sample sign screen
+│   ├── 08_optimization.ipynb            # MKP, submodular (exact PWL-MILP), robust knapsack, exact Pareto
+│   ├── 09_binding.ipynb                 # sensitivity: when the optimisation structures bind (Appendix D)
+│   ├── 10_cross_country_full.ipynb      # full 34-system replication + sign test
+│   ├── 11_replication.ipynb             # optimisation replication in further systems
+│   ├── 12_convergent.ipynb              # convergent-validity check vs model-free contrast
+│   │  # --- revision analyses (referee response; each is a standalone script) ---
+│   ├── 13_rev_signtests.py              # conservative sign tests on the cross-national sign
+│   ├── 14_rev_finer_partition.py        # finer SES×sex×migration partition where migrant n permits
+│   ├── 15_rev_lever_split.py            # directly-deliverable vs attitudinal lever re-estimation
+│   ├── 16_rev_cate_comparison.py        # causal-forest CATE vs counterfactual, same knapsack
+│   ├── 17_rev_separation_diagnostic.py  # adjacent-separation diagnostic (Proposition 1)
+│   ├── 18_rev_reordering_probability.py # joint-bootstrap reordering probability
+│   ├── 19_rev_pof_spread.py             # price-of-fairness spread across the correlation spectrum
+│   └── 20_rev_denmark_mechanism.py      # why a weak-correlation system can carry a high price of fairness
 ├── results/
 │   ├── figures/          # grayscale .png + .pdf, 600 dpi
 │   └── tables/           # .csv (+ .tex)
@@ -51,15 +63,20 @@ pipeline:
 └── README.md
 ```
 
+The core notebooks (01–12) reproduce the main text and appendices. The revision
+scripts (13–20) are standalone Python files added in response to peer review; each
+reads the IEA data (and, for 13, the `cross_country_35.csv` written by notebook 10)
+and writes its own table to `results/tables/`. Run them with `python -I <script>.py`.
+
 ## Data access
 
 This study uses the **IEA ICILS 2023 International Database** (public-use) and its
 **National Contexts Survey**. The data are **not redistributed here** under the IEA
 licence. To reproduce:
 
-1. Download the ICILS 2023 International Database (SAS format) and the National Contexts
-   Survey from the IEA Data Repository (`https://www.iea.nl/data-tools/repository`).
-   DOI: `10.58150/ICILS_2023_data_2`.
+1. Download the ICILS 2023 International Database (SAS format) and the National
+   Contexts Survey from the IEA Data Repository
+   (`https://www.iea.nl/data-tools/repository`). DOI: `10.58150/ICILS_2023_data_2`.
 2. Place the student (`bsg*i3.sas7bdat`) and school (`bcg*i3.sas7bdat`) files for the
    analysed systems, together with `ICILS2023NCS.sav`, directly inside `data/`.
 
@@ -74,43 +91,35 @@ Python 3.13. Install dependencies:
 pip install -r requirements.txt
 ```
 
+The revision script `16_rev_cate_comparison.py` additionally requires `econml`
+(causal forest); install it with `pip install econml` if it is not already present.
+
 ## Reproduce
 
-Run the notebooks in order (each is a single self-contained cell):
+Run the core notebooks in order:
 
 ```
-jupyter nbconvert --to notebook --execute --inplace notebooks/01_prediction_signal.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/02_counterfactual_sensitivity.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/03_targeting_frontier.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/04_cross_country.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/05_policy_appendix.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/06_inference.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/07_robustness.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/08_optimization.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/09_binding.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/10_cross_country_full.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/11_replication.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/12_convergent.ipynb
+for nb in notebooks/0*.ipynb notebooks/1[0-2]_*.ipynb; do
+  jupyter nbconvert --to notebook --execute --inplace "$nb"
+done
 ```
 
 Notebooks 03, 05, 07 and 08 read tables written by earlier notebooks, so run them in
-sequence. Notebook 08 additionally requires `scipy>=1.9` (HiGHS MILP solver).
-All figures are written to `results/figures/` as 600-dpi grayscale PNG and PDF (no titles
-or captions; captions belong in the manuscript); all tables to `results/tables/`.
-
-## Citation
+sequence. Notebook 08 requires `scipy>=1.9` (HiGHS MILP solver). Then run the revision
+analyses:
 
 ```
-@article{anonymous_targeting,
-  title   = {A Counterfactual-Explanation-and-Optimisation Framework for
-             Budget-Constrained Intervention Targeting},
-  author  = {Anonymous},
-  journal = {Anonymous journal (under review)},
-  year    = {2026}
-}
+cd notebooks
+for s in 13_*.py 14_*.py 15_*.py 16_*.py 17_*.py 18_*.py 19_*.py 20_*.py; do
+  python -I "$s"
+done
 ```
+
+All figures are written to `results/figures/` as 600-dpi grayscale PNG and PDF (no
+titles or captions; captions belong in the manuscript); all tables to
+`results/tables/`.
 
 ## License
 
-Code is released under the MIT License (see `LICENSE`). The ICILS data are governed by the
-IEA licence and are not covered by this repository's licence.
+Code is released under the MIT License (see `LICENSE`). The ICILS data are governed by
+the IEA licence and are not covered by this repository's licence.

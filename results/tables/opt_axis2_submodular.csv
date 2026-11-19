@@ -1,0 +1,2 @@
+submodular_OPT,greedy,greedy_ratio_to_OPT,guarantee,OPT_over_value_greedy_pct
+12300.2,11995.0,0.975,0.632,0.11
