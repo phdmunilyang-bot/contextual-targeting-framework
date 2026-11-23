@@ -1,0 +1,7 @@
+test,detail,p_value
+naive_sign,31/34,3.8300640881061554e-07
+resolved_only_|r|>=.5,30/33,7.005874067544937e-07
+deff_1.5,"n_eff=23,neg=21",3.3020973205566406e-05
+deff_2.0,"n_eff=17,neg=16",0.0001373291015625
+deff_3.0,"n_eff=11,neg=10",0.005859375
+wilcoxon_median<0,median=-0.93,2.6092684012089188e-05

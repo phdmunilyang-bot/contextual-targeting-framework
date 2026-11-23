@@ -1,0 +1,3 @@
+country,schools,integrality_gap_pct,price_of_robustness_pct,price_of_fairness_pct
+DEU,222,0.071,0.41,16.04
+ITA,152,0.193,0.57,5.49

@@ -1,0 +1,3 @@
+lever_set,levers,order,corr_base_sens,kendall_tau_vs_full
+full,S_LRNINTO;S_ICTPOSS;S_GENCLASS;S_LRNSAFE,Low/Sex0 > Low/Sex1 > High/Sex0 > Mid/Sex0 > Mid/Sex1 > High/Sex1,-0.91,1.0
+deliverable_only,S_LRNINTO;S_GENCLASS;S_LRNSAFE,Low/Sex0 > High/Sex0 > Low/Sex1 > Mid/Sex0 > High/Sex1 > Mid/Sex1,-0.773,0.733
