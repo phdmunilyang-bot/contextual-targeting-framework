@@ -1,6 +1,0 @@
-metric,value
-reorder_prob_pct,71.2
-mean_kendall_tau,0.856
-lowest_stable_pct,76.5
-top_stable_pct,93.8
-B,400.0
